@@ -66,10 +66,10 @@ struct Camera {
 }
 
 enum TextureType {
-    SolidColor(Color),
-    Gradient(Color, Color), // two colors
-    // Checkerboard(Color, Color, f32), // two colors and scale
+    Color(Color),
+    Checkerboard(Color, Color, f32), // two colors and scale
     // Image(String), // path to image file (not implemented)
+    gradient(Color, Color), // two colors
 }
 
 struct Color {
