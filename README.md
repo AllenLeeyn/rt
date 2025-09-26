@@ -15,6 +15,7 @@ steps:
     - change the brightness
     - change the camera position and angle
 
+```
 rt/
 ├── Cargo.toml
 ├── src/
@@ -120,6 +121,7 @@ struct Vec3 {
     y: f32,
     z: f32,
 }
+```
 
 - 4 .ppm (800x600)
     - A scene with a sphere;

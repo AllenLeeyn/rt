@@ -14,8 +14,11 @@ impl Texture {
             Texture::SolidColor(color) => *color,
 
             Texture::Gradient(start, end, angle_rad) => {
-                let u_rotated = u * angle_rad.cos() - v * angle_rad.sin();
-                let t = u_rotated.clamp(0.0, 1.0);
+                let u_centered = u - 0.5;
+                let v_centered = v - 0.5;
+
+                let u_rotated = u_centered * angle_rad.cos() - v_centered * angle_rad.sin();
+                let t = (u_rotated + 0.5).clamp(0.0, 1.0);
                 Color::lerp(*start, *end, t)
             }
         }

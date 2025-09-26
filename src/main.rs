@@ -1,23 +1,26 @@
-use rt::image::*;
-use rt::color::*;
+use rt::color::Color;
+use rt::scene::*;
+use rt::texture::*;
+use rt::vec3::*;
 
 fn main() -> std::io::Result<()> {
-    let image_width = 255;
-    let image_height = 255;
+    let mut scene = Scene::new();
 
-    let mut image = Image::new(image_width, image_height);
+    scene.camera_mut().set(
+        Vec3::new(2.0, 10.0, 2.0),
+        Vec3::zero(),
+        Point3::new(0.0, 1.0, 0.0),
+        60.0,
+        1.0,
+        (400, 300));
 
-    for y in 0..image_height {
-        for x in 0..image_width {
-            let r = (x as f64 / (image_width - 1) as f64 * 255.999) as u8;
-            let g = (y as f64 / (image_height - 1) as f64 * 255.999) as u8;
-            let b = 63;
+    scene.set_background(Texture::Gradient(
+        Color::PASTEL_BLUE, 
+        Color::PASTEL_YELLOW,
+        3.142/2.0
+    ));
 
-            image.add_pixel(Color::new(r, g, b));
-        }
-    }
-
-    image.save_ppm("output.ppm")?;
+    scene.render("output2.ppm")?;
 
     Ok(())
 }

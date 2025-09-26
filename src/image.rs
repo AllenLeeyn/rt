@@ -11,18 +11,22 @@ pub struct Image {
 
 impl Image {
     pub fn new(width: usize, height: usize) -> Self {
-        Self { width, height, pixels: Vec::new() }
+        Self { width, height, pixels: Vec::with_capacity(width * height) }
     }
 
-    pub fn add_pixel(&mut self, color: Color) {
-        self.pixels.push(color);
+    pub fn set_pixel(&mut self, x: usize, y: usize, color: Color) {
+        let idx = y * self.width + x;
+        if idx < self.pixels.len() {
+            self.pixels[idx] = color;
+        } else {
+            self.pixels.push(color);
+        }
     }
     
     pub fn save_ppm(&self, path: &str) -> std::io::Result<()> {
         let file = File::create(path)?;
         let mut writer = BufWriter::new(file);
 
-        // Manually write using Unix-style newlines
         writeln!(writer, "P3")?;
         writeln!(writer, "{} {}", self.width, self.height)?;
         writeln!(writer, "255")?;
