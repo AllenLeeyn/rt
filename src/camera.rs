@@ -18,16 +18,16 @@ pub struct Camera {
 impl Camera {
     pub fn new() -> Self {
         let mut camera = Camera {
-            origin: Vec3::one(),
-            look_at: Vec3::zero(),
+            origin: Vec3::ONE,
+            look_at: Vec3::ZERO,
             vup: Vec3::new(0.0, 0.0, 0.0),
             vfov: 60.0,
             focal_length: 1.0,
             aspect_ratio: 600_f32 / 400_f32,
             resolution: (600, 400),
-            lower_left_corner: Point3::zero(),
-            horizontal: Vec3::zero(),
-            vertical: Vec3::zero(),
+            lower_left_corner: Point3::ZERO,
+            horizontal: Vec3::ZERO,
+            vertical: Vec3::ZERO,
         };
         camera.compute_frame_basis();
         camera

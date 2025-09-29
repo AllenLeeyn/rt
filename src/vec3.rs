@@ -3,7 +3,7 @@ use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssi
 
 use crate::sq;
 
-#[derive(Copy, Clone, Default)]
+#[derive(Debug, Copy, Clone, Default)]
 pub struct Vec3 {
     x: f32,
     y: f32,
@@ -11,6 +11,13 @@ pub struct Vec3 {
 }
 
 impl Vec3 {
+    
+    pub const ONE: Vec3 = Self { x: 1.0, y: 1.0, z: 1.0 };
+    pub const ZERO: Vec3 = Self { x: 0.0, y: 0.0, z: 0.0 };
+    pub const X: Vec3 = Self { x: 1.0, y: 0.0, z: 0.0 };
+    pub const Y: Vec3 = Self { x: 0.0, y: 1.0, z: 0.0 };
+    pub const Z: Vec3 = Self { x: 0.0, y: 0.0, z: 1.0 };
+
     pub fn x(&self) -> f32 {
         self.x
     }
@@ -49,13 +56,9 @@ impl Vec3 {
             self.x() * v.y() - self.y() * v.x(),
         )
     }
-
-    pub fn one() -> Self {
-        Self { x: 1.0, y: 1.0, z: 1.0 }
-    }
-
-    pub fn zero() -> Self {
-        Self { x: 0.0, y: 0.0, z: 0.0 }
+    
+    pub fn dot(&self, v: Vec3) -> f32 {
+        self.x() * v.x() + self.y() * v.y() + self.z() * v.z()
     }
 }
 
@@ -140,18 +143,28 @@ impl DivAssign<f32> for Vec3 {
     }
 }
 
-pub fn dot(u: Vec3, v: Vec3) -> f32 {
-    u.x() * v.x() + u.y() * v.y() + u.z() * v.z()
+use std::ops::{Index, IndexMut};
+
+impl Index<usize> for Vec3 {
+    type Output = f32;
+
+    fn index(&self, i: usize) -> &Self::Output {
+        match i {
+            0 => &self.x,
+            1 => &self.y,
+            2 => &self.z,
+            _ => panic!("Vec3 index out of range"),
+        }
+    }
 }
 
-pub fn cross(u: Vec3, v: Vec3) -> Vec3 {
-    Vec3::new(
-        u.y() * v.z() - u.z() * v.y(),
-        u.z() * v.x() - u.x() * v.z(),
-        u.x() * v.y() - u.y() * v.x(),
-    )
-}
- 
-pub fn unit_vector(v: Vec3) -> Vec3 {
-    v / v.length()
+impl IndexMut<usize> for Vec3 {
+    fn index_mut(&mut self, i: usize) -> &mut f32 {
+        match i {
+            0 => &mut self.x,
+            1 => &mut self.y,
+            2 => &mut self.z,
+            _ => panic!("Vec3 index out of range"),
+        }
+    }
 }
