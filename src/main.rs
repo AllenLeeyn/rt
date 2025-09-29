@@ -1,6 +1,7 @@
 use rt::color::Color;
 use rt::cube::Cube;
 use rt::cylinder::Cylinder;
+use rt::image::Image;
 use rt::light::Light;
 use rt::plane::Plane;
 use rt::sphere::Sphere;
@@ -45,10 +46,11 @@ fn main() -> std::io::Result<()> {
     ));
 
     // Add plane to the scene
+    let image = Image::load("assets/bg.png")?;
     scene.add_object(Plane::new(
         Point3::new(0.0, 0.0, 0.0),
         Vec3::new(20.0, 0.0, 20.0),
-        Texture::Checkerboard(Color::GRAY, Color::PASTEL_GRAY, 20.0),
+        Texture::Image(image),
     ));
 
     scene.add_light(Light::new(

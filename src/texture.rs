@@ -1,12 +1,13 @@
 use crate::color::*;
 use crate::vec3::*;
+use crate::image::Image;
 
 #[derive(Debug, Clone)]
 pub enum Texture {
     SolidColor(Color),
     Gradient(Color, Color, f32),
     Checkerboard(Color, Color, f32),
-    // Image(Image),
+    Image(Image),
 }
 
 impl Texture {
@@ -32,7 +33,17 @@ impl Texture {
                 let t = (v * frequency) as i32;
                 let check = (s + t) % 2 == 0;
                 if check { *c1 } else { *c2 }
-            }
+            },
+            
+            Texture::Image(image) => {
+                let u = u.clamp(0.0, 1.0);
+                let v = v.clamp(0.0, 1.0);
+
+                let x = (u * (image.width as f32 - 1.0)).round() as usize;
+                let y = ((1.0 - v) * (image.height as f32 - 1.0)).round() as usize;
+
+                image.get_pixel(x, y)
+            },
         }
     }
 }

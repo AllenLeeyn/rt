@@ -1,8 +1,10 @@
 use std::fs::File;
 use std::io::{BufWriter, Write};
+use image::ImageReader;
 
 use crate::color::*;
 
+#[derive(Debug, Clone)]
 pub struct Image {
     pub width: usize,
     pub height: usize,
@@ -36,6 +38,33 @@ impl Image {
         }
 
         Ok(())
+    }
+    
+    pub fn load(path: &str) -> std::io::Result<Self> {
+        // Load the image using the image crate
+        let img = ImageReader::open(path)
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?
+            .decode()
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?
+            .to_rgb8(); // Convert to RGB
+
+        let (width, height) = img.dimensions();
+        let mut pixels = Vec::with_capacity((width * height) as usize);
+
+        for pixel in img.pixels() {
+            let [r, g, b] = pixel.0;
+            pixels.push(Color::new(r, g, b));
+        }
+
+        Ok(Self {
+            width: width as usize,
+            height: height as usize,
+            pixels,
+        })
+    }
+    
+    pub fn get_pixel(&self, x: usize, y: usize) -> Color {
+        self.pixels[y * self.width + x]
     }
 }
 
