@@ -1,13 +1,14 @@
 use crate::camera::*;
 use crate::color::*;
+use crate::hit::Hittable;
 use crate::image::*;
+use crate::light::*;
 use crate::ray::*;
 use crate::texture::*;
-use crate::vec3::Vec3;
 
 pub struct Scene {
-    //objects: Vec<Object>,
-    //lights: Vec<Light>,
+    objects: Vec<Box<dyn Hittable>>,
+    lights: Vec<Light>,
     background: Texture,
     camera: Camera,
     //max_ray_depth: u32,
@@ -16,6 +17,8 @@ pub struct Scene {
 impl Scene {
     pub fn new() -> Self {
         Scene {
+            objects: Vec::new(),
+            lights: Vec::new(),
             background: Texture::SolidColor(Color::new(0, 0, 0)), // black
             camera: Camera::new(),
         }
@@ -37,6 +40,15 @@ impl Scene {
         &mut self.camera
     }
 
+    pub fn add_object<T: Hittable + 'static>(&mut self, object: T) {
+        self.objects.push(Box::new(object));
+    }
+
+    
+    pub fn add_light(&mut self, light: Light) {
+        self.lights.push(light);
+    }
+
     pub fn render(&mut self, path: &str) -> std::io::Result<()> {
         let (width, height) = self.camera().resolution();
 
@@ -56,15 +68,28 @@ impl Scene {
         image.save_ppm(path)?;
         Ok(())
     }
-    
+
     pub fn ray_color(&self, ray: &Ray, u: f32, v: f32) -> Color {
+        let mut closest_so_far = 50.0;
+        let mut final_hit = None;
 
-        // Later: 
-        // 1. Check intersections
-        // 2. Apply shading
-        // 3. Return background if nothing hit
+        for object in &self.objects {
+            if let Some(hit) = object.hit(ray, 0.001, closest_so_far) {
+                closest_so_far = hit.t;
+                final_hit = Some(hit);
+            }
+        }
 
-        self.background.value_at(u, v, Vec3::zero())
+        if let Some(hit) = final_hit {
+            let mut final_color = Color::BLACK;
+
+            for light in &self.lights {
+                final_color += light.contribution_from_hit(&self.objects, &hit);
+            }
+
+            return final_color
+        }
+        self.background.value_at(u, v, ray.origin())
     }
 
 }

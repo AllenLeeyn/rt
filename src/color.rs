@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Color {
     r: u8,
     g: u8,
@@ -57,5 +57,48 @@ use std::fmt;
 impl fmt::Display for Color {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{} {} {}", self.r, self.g, self.b)
+    }
+}
+
+use std::ops::Mul;
+impl Mul<f32> for Color {
+    type Output = Color;
+
+    fn mul(self, rhs: f32) -> Color {
+        fn scale(c: u8, f: f32) -> u8 {
+            (c as f32 * f.clamp(0.0, 1.0)).round().clamp(0.0, 255.0) as u8
+        }
+
+        Color {
+            r: scale(self.r, rhs),
+            g: scale(self.g, rhs),
+            b: scale(self.b, rhs),
+        }
+    }
+}
+
+impl Mul<Color> for Color {
+    type Output = Color;
+
+    fn mul(self, rhs: Color) -> Color {
+        fn blend(a: u8, b: u8) -> u8 {
+            ((a as u16 * b as u16) / 255) as u8
+        }
+
+        Color {
+            r: blend(self.r, rhs.r),
+            g: blend(self.g, rhs.g),
+            b: blend(self.b, rhs.b),
+        }
+    }
+}
+
+use std::ops::AddAssign;
+
+impl AddAssign for Color {
+    fn add_assign(&mut self, other: Self) {
+        self.r = self.r.saturating_add(other.r);
+        self.g = self.g.saturating_add(other.g);
+        self.b = self.b.saturating_add(other.b);
     }
 }

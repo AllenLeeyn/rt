@@ -19,19 +19,22 @@ steps:
 rt/
 ├── Cargo.toml
 ├── src/
-│   ├── lib.rs          <- Public API of the crate
-│   ├── main.rs         <- Optional: binary for rendering scenes
-│   ├── scene.rs        <- Scene struct and builder
+│   ├── aabb.rs
 │   ├── camera.rs       <- Camera logic
-│   ├── object.rs       <- Object definitions and intersection logic
-│   ├── material.rs     <- Material and texture logic
-│   ├── light.rs        <- Lights and shading
-│   ├── ray.rs          <- Ray struct and helpers
-│   ├── vector.rs       <- Vec3 implementation
 │   ├── color.rs        <- Color type and conversions
-│   ├── render.rs       <- Renderer logic (ray casting, recursion)
+│   ├── cube.rs
+│   ├── cylinder.rs
+│   ├── hit.rs
 │   ├── image.rs        <- Image struct and PPM export
-│   └── utils.rs        <- Misc utilities (e.g., clamp, lerp, random)
+│   ├── lib.rs          <- Public API of the crate
+│   ├── light.rs        <- Lights and shading
+│   ├── main.rs         <- Optional: binary for rendering scenes
+│   ├── plane.rs
+│   ├── ray.rs          <- Ray struct and helpers
+│   ├── scene.rs        <- Scene struct and builder
+│   ├── sphere.rs
+│   ├── texture.rs
+│   ├── vec3.rs         <- Vec3 implementation
 └── README.md
 
 
@@ -100,7 +103,8 @@ enum ObjectType {
 struct Object {
     obj_type: ObjectType,
     transform: Transform,
-    material: Material,
+    texture: Texture,
+    //material: Material,
 }
 
 struct Ray {
