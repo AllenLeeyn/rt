@@ -88,6 +88,8 @@ fn scene_one(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
     
@@ -123,6 +125,8 @@ fn scene_two(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
     
@@ -139,6 +143,8 @@ fn scene_two(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
     
@@ -172,6 +178,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -187,6 +195,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -202,6 +212,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -217,6 +229,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -232,6 +246,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -247,6 +263,8 @@ fn scene_three(scene: &mut Scene) {
             emission: Some(Color::WHITE * 5.0),
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -273,6 +291,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -288,6 +308,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.1,
             shininess: 16.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -303,6 +325,8 @@ fn scene_three(scene: &mut Scene) {
             emission: Some(Color::ORANGE * 5.0),
             specular: 0.1,
             shininess: 16.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -318,6 +342,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 8.0,
             shininess: 128.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -333,6 +359,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 8.0,
             shininess: 128.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -348,6 +376,8 @@ fn scene_three(scene: &mut Scene) {
             emission: None,
             specular: 0.1,
             shininess: 0.1,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 }
@@ -373,6 +403,8 @@ fn scene_four(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -389,6 +421,8 @@ fn scene_four(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -404,6 +438,8 @@ fn scene_four(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -419,6 +455,8 @@ fn scene_four(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
     scene.add_light(Light::new_directional(
@@ -459,6 +497,8 @@ fn scene_five(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -474,6 +514,8 @@ fn scene_five(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -489,6 +531,8 @@ fn scene_five(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -504,6 +548,8 @@ fn scene_five(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -519,6 +565,8 @@ fn scene_five(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -534,6 +582,8 @@ fn scene_five(scene: &mut Scene) {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
     ));
 
@@ -557,8 +607,8 @@ fn scene_six(scene: &mut Scene) {
         (400, 300));
 
     scene.set_background(
-        Texture::Gradient(Color::DARK_BLUE,
-            Color::DARK_CYAN, 1.571));
+        Texture::Gradient(Color::DARK_BLUE * 0.2,
+            Color::DARK_CYAN * 0.2, 1.571));
 
     scene.add_object(Cylinder::new(
         Point3::ZERO,
@@ -571,12 +621,14 @@ fn scene_six(scene: &mut Scene) {
             ior: 0.0,
             emission: None,
             specular: 0.0,
-            shininess: 0.0
+            shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
     scene.add_object(Sphere::new(
-        Point3::new(-4.0, 6.0, -4.0),
+        Point3::new(-0.0, 6.0, -6.0),
         0.75,
         Material { 
             texture: Texture::SolidColor(Color::ORANGE),
@@ -586,7 +638,9 @@ fn scene_six(scene: &mut Scene) {
             ior: 0.0,
             emission: Some(Color::ORANGE * 10.0),
             specular: 0.0,
-            shininess: 0.0
+            shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
@@ -601,7 +655,9 @@ fn scene_six(scene: &mut Scene) {
             ior: 1.5,
             emission: None,
             specular: 4.0,
-            shininess: 128.0
+            shininess: 128.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
@@ -616,7 +672,9 @@ fn scene_six(scene: &mut Scene) {
             ior: 1.5,
             emission: None,
             specular: 0.0,
-            shininess: 0.0
+            shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
@@ -631,7 +689,9 @@ fn scene_six(scene: &mut Scene) {
             ior: 1.5,
             emission: None,
             specular: 4.0,
-            shininess: 128.0
+            shininess: 128.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
@@ -646,7 +706,9 @@ fn scene_six(scene: &mut Scene) {
             ior: 1.5,
             emission: None,
             specular: 0.0,
-            shininess: 0.0
+            shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
@@ -661,7 +723,9 @@ fn scene_six(scene: &mut Scene) {
             ior: 1.5,
             emission: None,
             specular: 4.0,
-            shininess: 128.0
+            shininess: 128.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
@@ -676,7 +740,9 @@ fn scene_six(scene: &mut Scene) {
             ior: 1.5,
             emission: None,
             specular: 0.0,
-            shininess: 0.0
+            shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         })
     );
 
@@ -709,7 +775,9 @@ fn scene_six(scene: &mut Scene) {
                 ior: 0.0,
                 emission: None,
                 specular: 0.0,
-                shininess: 0.0
+                shininess: 0.0,
+                is_volume: false,
+                density: 0.0,
             };
 
             Box::new(Cube::new(
@@ -739,7 +807,9 @@ fn scene_six(scene: &mut Scene) {
                 ior: 0.0,
                 emission: Some(Color::WHITE),
                 specular: 0.0,
-                shininess: 0.0
+                shininess: 0.0,
+                is_volume: false,
+                density: 0.0,
             };
 
             Box::new(Sphere::new(
@@ -754,6 +824,51 @@ fn scene_six(scene: &mut Scene) {
     // Generate and add particles to the scene
     for star in stars.generate() {
         scene.add_boxed_object(star);
+    }
+
+    let clouds = ParticleSys::new(
+        Point3::new(-7.0, 4.5, -7.0), // min corner of bounding box
+        Point3::new(0.0, 5.0, 0.0),   // max corner
+        30,                           // number of cloud particles
+        |_i: usize, pos: Point3| {
+            let radius = 0.2 + random_double() * 0.5; // 0.5 to 0.8
+
+            let boundary_sphere = Box::new(Sphere::new(pos, radius, Material {
+                // Dummy material for boundary
+                texture: Texture::SolidColor(Color::WHITE),
+                diffuse: 0.0,
+                reflectivity: 0.0,
+                transparency: 0.0,
+                ior: 0.0,
+                emission: None,
+                specular: 0.0,
+                shininess: 0.0,
+                is_volume: false,
+                density: 0.0,
+            }));
+
+            let cloud_material = Material {
+                texture: Texture::SolidColor(Color::new(0.9, 0.9, 1.0)), // soft cloudy white
+                diffuse: 0.0,
+                reflectivity: 0.0,
+                transparency: 1.0,
+                ior: 1.0,
+                emission: Some(Color::WHITE),
+                specular: 0.0,
+                shininess: 0.0,
+                is_volume: true,
+                density: 0.2, // tweak for softness
+            };
+
+            let volume = Volumes::new(boundary_sphere, cloud_material.density, cloud_material);
+
+            Box::new(volume) as Box<dyn Hittable>
+        },
+        1.0, // spacing factor
+    );
+
+    for cloud in clouds.generate() {
+        scene.add_boxed_object(cloud);
     }
 }
 
@@ -773,6 +888,8 @@ fn random_material() -> Material {
             emission: None,
             specular: 0.0,
             shininess: 0.0,
+            is_volume: false,
+            density: 0.0,
         },
         1 => Material {
             texture,
@@ -783,6 +900,8 @@ fn random_material() -> Material {
             emission: None,
             specular: 6.0,
             shininess: 128.0,
+            is_volume: false,
+            density: 0.0,
         },
         2 => Material {
             texture,
@@ -793,6 +912,8 @@ fn random_material() -> Material {
             emission: None,
             specular: 3.0,
             shininess: 64.0,
+            is_volume: false,
+            density: 0.0,
         },
         _ => unreachable!(),
     }

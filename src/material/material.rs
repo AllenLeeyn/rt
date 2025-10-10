@@ -14,6 +14,9 @@ pub struct Material {
     
     pub specular: f32,
     pub shininess: f32,
+
+    pub is_volume: bool,
+    pub density: f32,
 }
 
 #[derive(Debug, Clone)]
@@ -28,10 +31,27 @@ impl Material {
     }
     
     pub fn emitted(&self, u: f32, v: f32, p: Point3) -> Color {
-        self.emission.unwrap_or(self.texture.value_at(u, v, p))
+        self.emission.unwrap_or(Color::DARK_GRAY)
     }
 
     pub fn scatter(&self, ray_in: &Ray, hit: &HitRecord) -> Option<ScatterResult> {
+        if self.is_volume {
+            // Isotropic scattering inside the volume
+
+            // Scatter direction is random inside unit sphere (isotropic)
+            let scatter_dir = Vec3::random_in_unit_sphere();
+
+            let scattered_ray = Ray::new(hit.p, scatter_dir);
+
+            // Attenuation is based on volume color and density
+            let attenuation = self.texture.value_at(hit.u, hit.v, hit.p) * self.density;
+
+            return Some(ScatterResult {
+                scattered_ray,
+                attenuation,
+            });
+        }
+        
         let diffuse = self.diffuse.clamp(0.0, 1.0);
         let reflectivity = self.reflectivity.clamp(0.0, 1.0);
         let transparency = self.transparency.clamp(0.0, 1.0);
