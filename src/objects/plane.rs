@@ -100,4 +100,8 @@ impl Hittable for Plane {
             material: self.material.clone(),
         })
     }
+
+    fn position(&self) -> Point3 {
+        self.center
+    }
 }

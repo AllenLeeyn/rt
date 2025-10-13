@@ -30,8 +30,24 @@ impl Material {
         self.texture.value_at(u, v, point)
     }
     
-    pub fn emitted(&self, u: f32, v: f32, p: Point3) -> Color {
-        self.emission.unwrap_or(Color::DARK_GRAY)
+    pub fn emitted(&self, u: f32, v: f32, _p: Point3) -> Color {
+        if let Some(base_emission) = self.emission {
+            let du = u - 0.5;
+            let dv = v - 0.5;
+            let dist_sq = du * du + dv * dv; // radial distance squared in UV space
+
+            // Map from center (0) to edge (~0.5..0.7), clamp just in case
+            let radius_uv = 1.0;
+            let norm_dist = (dist_sq.sqrt() / radius_uv).clamp(0.0, 1.0);
+
+            // Apply falloff
+            let falloff_power = 2.0; // Increase for sharper core
+            let falloff = (1.0 - norm_dist).powf(falloff_power);
+
+            return base_emission * falloff;
+        }
+
+        Color::BLACK
     }
 
     pub fn scatter(&self, ray_in: &Ray, hit: &HitRecord) -> Option<ScatterResult> {
@@ -39,12 +55,11 @@ impl Material {
             // Isotropic scattering inside the volume
 
             // Scatter direction is random inside unit sphere (isotropic)
-            let scatter_dir = Vec3::random_in_unit_sphere();
-
+            let scatter_dir = Vec3::random_unit_vector();
             let scattered_ray = Ray::new(hit.p, scatter_dir);
 
             // Attenuation is based on volume color and density
-            let attenuation = self.texture.value_at(hit.u, hit.v, hit.p) * self.density;
+            let attenuation = self.texture.value_at(hit.u, hit.v, hit.p);
 
             return Some(ScatterResult {
                 scattered_ray,

@@ -25,7 +25,7 @@ impl Hittable for Volumes {
         let hit2 = self.boundary.hit(ray, hit1.t + 0.0001, f32::INFINITY)?;
 
         let mut t1 = hit1.t.max(t_min);
-        let mut t2 = hit2.t.min(t_max);
+        let t2 = hit2.t.min(t_max);
 
         if t1 >= t2 {
             return None;
@@ -49,7 +49,7 @@ impl Hittable for Volumes {
         let falloff = (1.0 - (distance_from_center / radius).powi(2)).clamp(0.0, 1.0); // smoother dropoff
 
         // You can randomly reject this sample to fake density variation
-        if random_double() > falloff {
+        if random_double() * 6.0 > falloff {
             return None;
         }
 
@@ -63,5 +63,9 @@ impl Hittable for Volumes {
             material: self.phase_function.clone(),
             color: self.phase_function.value_at(0.0, 0.0, p),
         })
+    }
+
+    fn position(&self) -> Point3 {
+        self.boundary.position()
     }
 }

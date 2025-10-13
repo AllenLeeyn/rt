@@ -84,4 +84,9 @@ impl Hittable for Sphere {
             material: self.material.clone(),
         })
     }
+    
+
+    fn position(&self) -> Point3 {
+        self.center
+    }
 }

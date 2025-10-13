@@ -168,4 +168,8 @@ impl Hittable for Cylinder {
 
         closest_hit
     }
+
+    fn position(&self) -> Point3 {
+        self.center
+    }
 }

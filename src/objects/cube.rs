@@ -116,4 +116,8 @@ impl Hittable for Cube {
             material: self.material.clone()
         })
     }
+    
+    fn position(&self) -> Point3 {
+        (self.max + self.min)/2.0
+    }
 }

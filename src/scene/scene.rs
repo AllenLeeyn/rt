@@ -142,12 +142,13 @@ impl Scene {
 
             if let Some(scatter) = hit.material.scatter(ray, &hit) {
                 let bounced_color = self.ray_color(&scatter.scattered_ray, u, v, depth - 1);
-                final_color = ( final_color *
-                        (1.0 - hit.material.transparency).max(0.01) *
-                        (1.0 - hit.material.reflectivity).max(0.01)
-                    ) + scatter.attenuation * bounced_color;
+                final_color = emitted + (
+                    final_color *
+                    (1.0 - hit.material.transparency).max(0.01) *
+                    (1.0 - hit.material.reflectivity).max(0.01)
+                ) + scatter.attenuation * bounced_color;
             } else {
-                final_color = emitted;
+                final_color = emitted + final_color
             }
 
             return final_color;
